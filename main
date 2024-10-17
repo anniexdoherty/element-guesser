@@ -1,0 +1,136 @@
+import random
+
+
+
+# current list of elements with their properties, need to add more just did knowlage based 
+elements = {
+    "hydrogen":  {"atomic_number": 1 , "group": 1, "period":  1},
+
+    "helium": {"atomic_number": 2 , "group": 18, "period": 1},
+
+    "lithium": {"atomic_number": 3 , "group": 1, "period": 2},
+
+    "beryllium":  {"atomic_number": 4 , "group": 2, "period":  2},
+
+    "boron": {"atomic_number": 5 , "group": 13, "period": 2},
+
+    "carbon": {"atomic_number": 6 , "group": 14, "period": 2},
+
+    "nitrogen": {"atomic_number": 7 , "group": 15, "period":  2},
+
+    "oxygen":  {"atomic_number": 8 , "group": 16, "period": 2},
+
+    "fluorine": {"atomic_number": 9 , "group": 17, "period": 2},
+
+    "neon": {"atomic_number": 10 , "group": 18, "period":  2},
+
+    "sodium":  {"atomic_number": 11 , "group": 1, "period":  3},
+
+    "magnesium": {"atomic_number": 12 , "group": 2, "period": 3},
+}
+
+
+#using import to select an element 
+def choose_random_element():
+
+    return random.choice( list(elements.keys())) 
+
+
+
+#the horriubel yes an no questions
+def yes_no_prompt(question):
+    while True:
+
+        response = input(question + " (yes/no): ").lower()
+        if response in ['yes', 'no']:
+
+            return response == 'yes'
+        
+        else:
+            print("please only respond with a 'yes' or 'no'.")
+#prob need to swap order but got confused 
+
+
+#game intro and using random to chose element 
+def main():
+
+    print("hello! welcome to guess the element, its like guess who, but with the elements!")
+    chosen_element = choose_random_element()
+
+    print("So, to start a random element from the periodic table has been chosen and you have to narrow down which one it is .")
+    
+
+    #rlly getting into things, begining of if/else hell, ANNIE NOTE: worried abt syntax mix ups be careful!
+    while True:
+        question_type = input("please ask about an elements 'atomic number', 'group', or 'period': ").lower()
+        
+#thinsg to guess so far
+        if question_type not in ['atomic number', 'group', 'period']:
+
+            print("oops! please choose a valid question type, that one was not valid :( .")
+
+            continue
+        #atomic number qestions 
+        if question_type == 'atomic number':
+
+            number = int(input("please type an an atomic number to compare: "))
+            
+            if elements[chosen_element]['atomic_number'] > number:
+
+                print("yep! it is greater!")
+
+            else:
+
+                print("nope!, it is not greater, its smaller!")
+        
+
+
+#element group questions 
+
+        elif question_type == 'group':
+            group = int(input("please enter a group number to compare: "))
+
+            if elements[chosen_element]['group'] == group:
+
+
+                print("yes! the element is part of that group.")
+            else:
+                print("nope! it is not part of that group.")
+        
+
+
+        #period questions 
+
+        elif question_type == 'period':
+            period = int(input(" please enter a period number to compare: "))
+            if elements[chosen_element]['period'] == period:
+            
+                print("yes! it belongs to that period.")
+            else:
+
+                print("nope! it does not belong to that period.")
+        
+
+
+
+        #begining of the end --> leading statments of guess/no guess 
+        guess = input("so! do you want to guess the element? (yes/no): ").lower()
+        if guess == 'yes':
+           
+            player_guess = input("well, what is your guess? ")
+            
+            
+            if player_guess == chosen_element:
+
+                print("yippie! you guessed correctly.")
+                break
+
+            else:
+                print("sorry! you guessed wrong please try again.")
+    
+
+    #game wrap up and the big reveal 
+    print(f"the element actually was {chosen_element}.")
+
+if __name__ == "__main__": #new learning: underscorfe python variable that lets u structre ur code only when module is exclusivly run vs imported, i think!
+    main()
